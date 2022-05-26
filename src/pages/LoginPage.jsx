@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from "./modules/LoginPage.module.css";
+import styles from "./cssmodules/LoginPage.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -15,17 +15,31 @@ function LoginPage() {
     setInputPw(e.target.value);
   };
 
-  const onClickLogin = () => {
-    console.log("click login");
+  const onClickLogin = (e) => {
+    e.preventDefault();
+    console.log(inputId);
+    axios
+      .post(
+        "http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth/login",
+        { account: inputId, password: inputPw }
+      )
+      .then((res) => {
+        console.log(res);
+        if (res.data.result === "FAIL") {
+          alert("로그인에 실패하였습니다.");
+        } else {
+          console.log("로그인 성공");
+          console.log(res.data.data);
+          const { account, token } = res.data.data;
+          console.log(token, account);
+          sessionStorage.setItem("jwtToken", token);
+        }
+        document.location.href = "/";
+      })
+      .catch();
   };
 
-  useEffect(() => {
-    fetch("15.164.49.91:8080/goods")
-      .then((response) => response.text())
-      .then((message) => {
-        console.log(message);
-      });
-  }, []);
+  useEffect(() => {});
 
   return (
     <div className="page">
@@ -59,7 +73,7 @@ function LoginPage() {
           </button>
 
           <div className={styles.sm}>
-            Don't have an account?{" "}
+            Don't have an account?
             <Link className={styles.sm} to="/register">
               Register
             </Link>{" "}
