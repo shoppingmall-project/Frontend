@@ -68,15 +68,16 @@
   pointer-events: none;
 }
 
-.formControl .label .span {
-  display: inline-block;
-  font-size: 18px;
-  min-width: 5px;
-  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
 .formControl .input:focus + .label .span,
 .formControl .input:valid + .label .span {
   color: lightblue;
   transform: translateY(-30px);
+}
+
+.radio {
+  display: flex;
+}
+.radioBtn {
+  margin-top: 20px;
+  margin-right: 20px;
 }

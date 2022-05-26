@@ -8,16 +8,25 @@ import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
+import { useEffect, useState } from "react";
+
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {}, []);
+
   return (
     <>
       <Router>
-        <Header />
+        <Header isLogin={isLogin} setIsLogin={setIsLogin} />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/products" element={<ProductsPage />}></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
+          <Route
+            path="/login"
+            element={<LoginPage isLogin={isLogin} setIsLogin={setIsLogin} />}
+          ></Route>
           <Route path="/contact" element={<ContactPage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
         </Routes>

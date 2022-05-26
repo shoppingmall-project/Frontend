@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-function Header() {
+function Header(props) {
+  // const { isLogin, setIsLogin } = props;
+  // [isLogin, setIsLogin] = useState();
+
   return (
     <>
       <nav className="nav">
@@ -26,11 +30,24 @@ function Header() {
                 Products
               </Link>
             </li>
+            {/* {isLogin ? ( */}
+            <li>
+              <Link
+                to={"/login"}
+                // onClick={() => setIsLogin(false)}
+                className="navLink"
+              >
+                Login
+              </Link>
+            </li>
+            )
+            {/* : (
             <li>
               <Link to={"/login"} className="navLink">
                 Login
               </Link>
             </li>
+            )} */}
             <li>
               <Link to={"/contact"} className="navLink">
                 Contact

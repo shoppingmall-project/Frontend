@@ -3,7 +3,8 @@ import styles from "./cssmodules/LoginPage.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function LoginPage() {
+function LoginPage(props) {
+  const { isLogin, loginCallBack } = props;
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
 
@@ -17,7 +18,6 @@ function LoginPage() {
 
   const onClickLogin = (e) => {
     e.preventDefault();
-    console.log(inputId);
     axios
       .post(
         "http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth/login",
@@ -29,6 +29,8 @@ function LoginPage() {
           alert("로그인에 실패하였습니다.");
         } else {
           console.log("로그인 성공");
+          // loginCallBack(true);
+          alert(isLogin + "로그인");
           console.log(res.data.data);
           const { account, token } = res.data.data;
           console.log(token, account);
@@ -39,7 +41,11 @@ function LoginPage() {
       .catch();
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    if (isLogin) {
+      document.location.href = "/";
+    }
+  });
 
   return (
     <div className="page">

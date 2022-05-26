@@ -19,6 +19,7 @@ body {
 }
 
 .nav {
+  display: block;
   position: fixed;
   background-color: #222;
   top: 0;
@@ -29,6 +30,7 @@ body {
 
 .nav .container {
   display: flex;
+  z-index: 100;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
