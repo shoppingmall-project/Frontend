@@ -1,4 +1,5 @@
 import axios from "axios";
+import styles from "./cssmodules/ProductsPage.module.css";
 
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
@@ -19,9 +20,11 @@ function ProductsPage() {
 
   return (
     <div className="page">
-      {products.map((product) => (
-        <Card product={product} key={product.id} />
-      ))}
+      <div className={styles.productContainer}>
+        {products.map((product) => (
+          <Card product={product} key={product.id} />
+        ))}
+      </div>
     </div>
   );
 }

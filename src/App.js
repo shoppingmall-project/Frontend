@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import MainPage from "./pages/MainPage";
 import AboutPage from "./pages/AboutPage";
-import ProductsPage from "./pages/Productspage";
+import ProductsPage from "./pages/ProductsPage";
 import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
