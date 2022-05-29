@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 function ContactPage() {
   return (
     <div className="page">

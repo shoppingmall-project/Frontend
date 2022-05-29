@@ -1,0 +1,23 @@
+.card_container {
+  margin: 20px;
+  width: 120px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.img_container {
+  width: 120px;
+  height: 180px;
+  overflow: hidden;
+}
+
+.img_container .img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.product_descriptions {
+  width: 120px;
+}

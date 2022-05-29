@@ -1,67 +1,35 @@
-import { Link } from "react-router-dom";
-import styles from "./cssmodules/LoginPage.module.css";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import styles from "./cssmodules/Card.module.css";
+import defaultImg from "../imgs/NoImg.png";
 
-function LoginPage() {
-  const [inputId, setInputId] = useState("");
-  const [inputPw, setInputPw] = useState("");
+function Card(props) {
+  const { product } = props;
+  const { category, name, price, brand, country, imgUrl, description } =
+    product;
 
-  const handleInputId = (e) => {
-    setInputId(e.target.value);
+  const onErrorImg = (e) => {
+    e.target.src = defaultImg;
   };
-
-  const handleInputPw = (e) => {
-    setInputPw(e.target.value);
-  };
-
-  useEffect(() => {
-    if (sessionStorage.getItem("jwtToken")) {
-      document.location.href = "/";
-    }
-  });
 
   return (
-    <div className="page">
-      <div className={styles.container}>
-        <div className={styles.text}>Please Login</div>
-        <form>
-          <div className={styles.formControl}>
-            <label htmlFor="input_id">Account</label>
-            <input
-              className={styles.input}
-              type="text"
-              value={inputId}
-              onChange={handleInputId}
-              required
-            />
-          </div>
-
-          <div className={styles.formControl}>
-            <label htmlFor="input_pw">Password</label>
-            <input
-              className={styles.input}
-              type="password"
-              value={inputPw}
-              onChange={handleInputPw}
-              required
-            />
-          </div>
-
-          <button className={styles.btn} onClick={onClickLogin}>
-            Login
-          </button>
-
-          <div className={styles.sm}>
-            Don't have an account?
-            <Link className={styles.sm} to="/register">
-              Register
-            </Link>{" "}
-          </div>
-        </form>
+    <div className={styles.card_container}>
+      <div className={styles.img_container}>
+        <img
+          className={styles.img}
+          src={defaultImg}
+          alt={name}
+          onError={onErrorImg}
+        />
+      </div>
+      <div className={styles.product_descriptions}>
+        <div className={styles.product_name}>{name}</div>
+        <div className={styles.product_price}>{price}</div>
+        <div className={styles.product_description}>{description}</div>
+        <div className={styles.product_brand}>{brand}</div>
+        <div className={styles.product_country}>{country}</div>
+        <div className={styles.product_category}>{category}</div>
       </div>
     </div>
   );
 }
 
-export default LoginPage;
+export default Card;

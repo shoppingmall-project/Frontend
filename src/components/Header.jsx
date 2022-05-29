@@ -6,7 +6,7 @@ function Header() {
 
   useEffect(() => {
     if (sessionStorage.getItem("jwtToken")) setIsLogin(true);
-  });
+  }, []);
 
   return (
     <>
