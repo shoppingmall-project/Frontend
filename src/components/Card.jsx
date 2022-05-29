@@ -15,29 +15,6 @@ function LoginPage() {
     setInputPw(e.target.value);
   };
 
-  const onClickLogin = (e) => {
-    e.preventDefault();
-    axios
-      .post(
-        "http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth/login",
-        { account: inputId, password: inputPw }
-      )
-      .then((res) => {
-        console.log(res);
-        if (res.data.result === "FAIL") {
-          alert("로그인에 실패하였습니다.");
-        } else {
-          console.log("로그인 성공");
-          console.log(res.data.data);
-          const { account, token } = res.data.data;
-          console.log(token, account);
-          sessionStorage.setItem("jwtToken", token);
-        }
-        document.location.href = "/";
-      })
-      .catch();
-  };
-
   useEffect(() => {
     if (sessionStorage.getItem("jwtToken")) {
       document.location.href = "/";

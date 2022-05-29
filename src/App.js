@@ -13,7 +13,14 @@ import { useEffect, useState } from "react";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (sessionStorage.getItem("jwtToken") === null) {
+      console.log("isLogin ?? :: ", isLogin);
+    } else {
+      setIsLogin(true);
+      console.log("isLogin ?? :: ", isLogin);
+    }
+  }, []);
 
   return (
     <>

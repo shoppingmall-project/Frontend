@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Header(props) {
-  // const { isLogin, setIsLogin } = props;
-  // [isLogin, setIsLogin] = useState();
+function Header() {
+  const [isLogin, setIsLogin] = useState();
+
+  useEffect(() => {
+    if (sessionStorage.getItem("jwtToken")) setIsLogin(true);
+  });
 
   return (
     <>
@@ -30,24 +33,26 @@ function Header(props) {
                 Products
               </Link>
             </li>
-            {/* {isLogin ? ( */}
-            <li>
-              <Link
-                to={"/login"}
-                // onClick={() => setIsLogin(false)}
-                className="navLink"
-              >
-                Login
-              </Link>
-            </li>
-            )
-            {/* : (
-            <li>
-              <Link to={"/login"} className="navLink">
-                Login
-              </Link>
-            </li>
-            )} */}
+            {isLogin ? (
+              <li>
+                <Link
+                  to={"/"}
+                  onClick={() => {
+                    setIsLogin(false);
+                    sessionStorage.removeItem("jwtToken");
+                  }}
+                  className="navLink"
+                >
+                  Logout
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link to={"/login"} className="navLink">
+                  Login
+                </Link>
+              </li>
+            )}
             <li>
               <Link to={"/contact"} className="navLink">
                 Contact

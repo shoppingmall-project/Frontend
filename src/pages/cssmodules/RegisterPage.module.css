@@ -61,19 +61,6 @@
   border-bottom-color: lightblue;
 }
 
-.formControl .label {
-  position: absolute;
-  top: 15px;
-  left: 0;
-  pointer-events: none;
-}
-
-.formControl .input:focus + .label .span,
-.formControl .input:valid + .label .span {
-  color: lightblue;
-  transform: translateY(-30px);
-}
-
 .radio {
   display: flex;
 }
