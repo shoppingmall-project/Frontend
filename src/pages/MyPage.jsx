@@ -34,12 +34,9 @@ function MyPage() {
       .put(
         `http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth/${inputId}`,
         {
-          account: inputAccount,
           password: inputPw,
-          gender: inputGender,
           role: "M",
           email: inputEmail,
-          name: inputName,
           address: inputAddress,
           phoneNum: inputPhoneNum,
         }
@@ -53,9 +50,24 @@ function MyPage() {
         const { account, token } = res.data.data;
         console.log(token, account);
         sessionStorage.setItem("jwtToken", token);
-        document.location.href = "/login";
       })
       .catch();
+    document.location.href = "/login";
+  };
+
+  const onClickDelete = (e) => {
+    e.preventDefault();
+    axios
+      .delete(
+        `http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth/${inputId}`
+      )
+      .then((res) => {
+        if (res.data.result === "FAIL") {
+          alert("회원 탈퇴에 실패하였습니다.");
+        } else alert("회원 탈퇴 성공");
+      })
+      .catch();
+    document.location.href = "/";
   };
 
   useEffect(() => {
@@ -178,6 +190,9 @@ function MyPage() {
 
           <button className={styles.btn} onClick={onClickModify}>
             Modify
+          </button>
+          <button className={styles.btn} onClick={onClickDelete}>
+            Delete
           </button>
         </form>
       </div>
