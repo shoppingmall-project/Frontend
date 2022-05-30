@@ -24,28 +24,30 @@ function Header() {
               </Link>
             </li>
             <li>
-              <Link to={"/about"} className="navLink">
-                About
-              </Link>
-            </li>
-            <li>
               <Link to={"/products"} className="navLink">
                 Products
               </Link>
             </li>
             {isLogin ? (
-              <li>
-                <Link
-                  to={"/"}
-                  onClick={() => {
-                    setIsLogin(false);
-                    sessionStorage.removeItem("jwtToken");
-                  }}
-                  className="navLink"
-                >
-                  Logout
-                </Link>
-              </li>
+              <>
+                <li>
+                  <Link
+                    to={"/"}
+                    onClick={() => {
+                      setIsLogin(false);
+                      sessionStorage.removeItem("jwtToken");
+                    }}
+                    className="navLink"
+                  >
+                    Logout
+                  </Link>
+                </li>
+                <li>
+                  <Link to={"/myPage"} className="navLink">
+                    Contact
+                  </Link>
+                </li>
+              </>
             ) : (
               <li>
                 <Link to={"/login"} className="navLink">
@@ -54,8 +56,8 @@ function Header() {
               </li>
             )}
             <li>
-              <Link to={"/contact"} className="navLink">
-                Contact
+              <Link to={"/mypage"} className="navLink">
+                My Page
               </Link>
             </li>
           </ul>

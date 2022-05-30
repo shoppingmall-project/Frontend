@@ -30,8 +30,8 @@ function LoginPage() {
           console.log("로그인 성공");
           console.log(res.data.data);
           const { account, token } = res.data.data;
-          console.log(token, account);
           sessionStorage.setItem("jwtToken", token);
+          sessionStorage.setItem("account", account);
         }
         document.location.href = "/";
       })

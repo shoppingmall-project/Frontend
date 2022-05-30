@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import MainPage from "./pages/MainPage";
 import AboutPage from "./pages/AboutPage";
 import ProductsPage from "./pages/ProductsPage";
-import ContactPage from "./pages/ContactPage";
+import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
@@ -15,10 +15,9 @@ function App() {
 
   useEffect(() => {
     if (sessionStorage.getItem("jwtToken") === null) {
-      console.log("isLogin ?? :: ", isLogin);
+      alert("로그인에 실패하였습니다.");
     } else {
       setIsLogin(true);
-      console.log("isLogin ?? :: ", isLogin);
     }
   }, []);
 
@@ -34,7 +33,7 @@ function App() {
             path="/login"
             element={<LoginPage isLogin={isLogin} setIsLogin={setIsLogin} />}
           ></Route>
-          <Route path="/contact" element={<ContactPage />}></Route>
+          <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
         </Routes>
       </Router>
