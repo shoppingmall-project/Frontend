@@ -64,7 +64,10 @@ function MyPage() {
       .then((res) => {
         if (res.data.result === "FAIL") {
           alert("회원 탈퇴에 실패하였습니다.");
-        } else alert("회원 탈퇴 성공");
+        } else {
+          alert("회원 탈퇴 성공");
+          sessionStorage.clear();
+        }
       })
       .catch();
     document.location.href = "/";
