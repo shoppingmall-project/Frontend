@@ -55,15 +55,12 @@ function RegisterPage() {
         }
       )
       .then((res) => {
-        console.log(res);
         if (res.data.result === "FAIL") {
           alert("회원가입에 실패하였습니다.");
-        } else alert("회원가입 성공");
-        console.log(res.data.data);
-        const { account, token } = res.data.data;
-        console.log(token, account);
-        sessionStorage.setItem("jwtToken", token);
-        document.location.href = "/login";
+        } else {
+          alert("회원가입에 성공하였습니다.");
+          document.location.href = "/";
+        }
       })
       .catch();
   };

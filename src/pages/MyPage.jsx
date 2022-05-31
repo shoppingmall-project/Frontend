@@ -74,14 +74,13 @@ function MyPage() {
   };
 
   useEffect(() => {
-    const sessionAccount = sessionStorage.getItem("account");
+    setInputId(sessionStorage.getItem("id"));
     axios
       .get(
-        `http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth`
+        `http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth/${inputId}`
       )
       .then((res) => {
-        const users = res.data.data;
-        const [user] = users.filter((user) => user.account === sessionAccount);
+        const user = res.data.data;
         setInputId(user.id);
         setInputAccount(user.account);
         setInputAddress(user.address);

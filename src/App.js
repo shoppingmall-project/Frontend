@@ -7,6 +7,7 @@ import ProductsPage from "./pages/ProductsPage";
 import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import CommunityPage from "./pages/CommunityPage";
 
 import { useEffect, useState } from "react";
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/products" element={<ProductsPage />}></Route>
+          <Route path="/community" element={<CommunityPage />}></Route>
           <Route
             path="/login"
             element={<LoginPage isLogin={isLogin} setIsLogin={setIsLogin} />}

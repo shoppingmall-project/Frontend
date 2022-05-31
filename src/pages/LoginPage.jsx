@@ -27,13 +27,12 @@ function LoginPage() {
         if (res.data.result === "FAIL") {
           alert("로그인에 실패하였습니다.");
         } else {
-          console.log("로그인 성공");
-          console.log(res.data.data);
-          const { account, token } = res.data.data;
+          const { account, token, id } = res.data.data;
           sessionStorage.setItem("jwtToken", token);
           sessionStorage.setItem("account", account);
+          sessionStorage.setItem("id", id);
+          document.location.href = "/";
         }
-        document.location.href = "/";
       })
       .catch();
   };
@@ -42,7 +41,7 @@ function LoginPage() {
     if (sessionStorage.getItem("jwtToken")) {
       document.location.href = "/";
     }
-  });
+  }, []);
 
   return (
     <div className="page">

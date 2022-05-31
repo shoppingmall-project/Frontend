@@ -28,6 +28,11 @@ function Header() {
                 Products
               </Link>
             </li>
+            <li>
+              <Link to={"/community"} className="navLink">
+                Community
+              </Link>
+            </li>
             {isLogin ? (
               <>
                 <li>
@@ -35,7 +40,7 @@ function Header() {
                     to={"/"}
                     onClick={() => {
                       setIsLogin(false);
-                      sessionStorage.removeItem("jwtToken");
+                      sessionStorage.clear();
                     }}
                     className="navLink"
                   >
@@ -44,7 +49,7 @@ function Header() {
                 </li>
                 <li>
                   <Link to={"/myPage"} className="navLink">
-                    Contact
+                    My Page
                   </Link>
                 </li>
               </>
@@ -55,11 +60,6 @@ function Header() {
                 </Link>
               </li>
             )}
-            <li>
-              <Link to={"/mypage"} className="navLink">
-                My Page
-              </Link>
-            </li>
           </ul>
         </div>
       </nav>
