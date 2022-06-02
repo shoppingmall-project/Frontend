@@ -28,16 +28,18 @@ function CommunityPage() {
             <col className={styles.createdDate} />
           </colgroup>
           <thead>
-            <th>id</th>
-            <th>title</th>
-            <th>author</th>
-            <th>views</th>
-            <th>createdAt</th>
+            <tr>
+              <th>id</th>
+              <th>title</th>
+              <th>author</th>
+              <th>views</th>
+              <th>createdAt</th>
+            </tr>
           </thead>
           <tbody>
             {boards.map((board) => {
               return (
-                <tr>
+                <tr key={board.boardId}>
                   <td>{board.boardId}</td>
                   <td>{board.title}</td>
                   <td>{board.author}</td>
