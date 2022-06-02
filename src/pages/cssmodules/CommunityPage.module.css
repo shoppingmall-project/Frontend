@@ -1,0 +1,38 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+  margin: 100px;
+}
+
+.container {
+  width: 1000px;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px 40px;
+  border-radius: 5px;
+}
+
+.table {
+  width: 100%;
+  margin: 40px auto 10px;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.select {
+  width: 15%;
+}
+
+.author {
+  width: 20%;
+}
+.views {
+  width: 15%;
+}
+.createdDate {
+  width: 30%;
+}

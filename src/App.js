@@ -15,9 +15,7 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("jwtToken") === null) {
-      alert("로그인에 실패하였습니다.");
-    } else {
+    if (sessionStorage.getItem("jwtToken") !== null) {
       setIsLogin(true);
     }
   }, []);
