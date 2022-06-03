@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/goods",
+  "proxy": "http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
