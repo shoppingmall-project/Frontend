@@ -89,7 +89,7 @@ function MyPage() {
         setInputPhoneNum(user.phoneNum);
         setInputName(user.name);
       });
-  }, []);
+  }, [inputId]);
 
   return (
     <div className="page">
