@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import MainPage from "./pages/MainPage";
 import AboutPage from "./pages/AboutPage";
 import ProductsPage from "./pages/ProductsPage";
+import ProductPage from "./pages/ProductPage";
 import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -28,6 +29,7 @@ function App() {
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/products" element={<ProductsPage />}></Route>
+          <Route path="/products:/productid" element={<ProductPage />}></Route>
           <Route path="/community" element={<CommunityPage />}></Route>
           <Route
             path="/login"
