@@ -3,7 +3,7 @@ import styles from "./cssmodules/RegisterPage.module.css";
 import axios from "axios";
 
 function MyPage() {
-  const [inputId, setInputId] = useState("");
+  const [inputId, setInputId] = useState(0);
   const [inputAccount, setInputAccount] = useState("");
   const [inputPw, setInputPw] = useState("");
   const [inputGender, setInputGender] = useState("");
@@ -11,6 +11,7 @@ function MyPage() {
   const [inputEmail, setInputEmail] = useState("");
   const [inputAddress, setInputAddress] = useState("");
   const [inputPhoneNum, setInputPhoneNum] = useState("");
+  const [role, setRole] = useState("");
 
   const handleInputPw = (e) => {
     setInputPw(e.target.value);
@@ -32,35 +33,33 @@ function MyPage() {
     e.preventDefault();
     axios
       .put(
-        `http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth/${inputId}`,
+        `http://54.180.53.149:8080/auth/${inputId}`,
         {
           password: inputPw,
-          role: "M",
+          role: role,
           email: inputEmail,
           address: inputAddress,
           phoneNum: inputPhoneNum,
-        }
+        },
+        { jwtToken: sessionStorage.getItem("jwtToken") }
       )
       .then((res) => {
         console.log(res);
         if (res.data.result === "FAIL") {
           alert("회원정보 수정에 실패하였습니다.");
-        } else alert("회원정보 수정 성공");
-        console.log(res.data.data);
-        const { account, token } = res.data.data;
-        console.log(token, account);
-        sessionStorage.setItem("jwtToken", token);
+        } else {
+          alert("회원정보 수정 성공");
+          sessionStorage.clear();
+          document.location.href = "/login";
+        }
       })
       .catch();
-    document.location.href = "/login";
   };
 
   const onClickDelete = (e) => {
     e.preventDefault();
     axios
-      .delete(
-        `http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth/${inputId}`
-      )
+      .delete(`http://54.180.53.149:8080/auth/${inputId}`)
       .then((res) => {
         if (res.data.result === "FAIL") {
           alert("회원 탈퇴에 실패하였습니다.");
@@ -76,18 +75,17 @@ function MyPage() {
   useEffect(() => {
     setInputId(sessionStorage.getItem("id"));
     axios
-      .get(
-        `http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth/${inputId}`
-      )
+      .get(`http://54.180.53.149:8080/auth/${inputId}`)
+      .catch((err) => console.log(err))
       .then((res) => {
         const user = res.data.data;
-        setInputId(user.id);
-        setInputAccount(user.account);
-        setInputAddress(user.address);
-        setInputEmail(user.email);
-        setInputGender(user.gender);
-        setInputPhoneNum(user.phoneNum);
-        setInputName(user.name);
+        setInputAccount(user?.account);
+        setInputAddress(user?.address);
+        setInputEmail(user?.email);
+        setInputGender(user?.gender);
+        setInputPhoneNum(user?.phoneNum);
+        setInputName(user?.name);
+        setRole(user?.role);
       });
   }, [inputId]);
 

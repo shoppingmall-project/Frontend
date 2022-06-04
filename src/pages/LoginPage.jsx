@@ -18,10 +18,10 @@ function LoginPage() {
   const onClickLogin = (e) => {
     e.preventDefault();
     axios
-      .post(
-        "http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth/login",
-        { account: inputId, password: inputPw }
-      )
+      .post("http://54.180.53.149:8080/auth/login", {
+        account: inputId,
+        password: inputPw,
+      })
       .then((res) => {
         console.log(res);
         if (res.data.result === "FAIL") {

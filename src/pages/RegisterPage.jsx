@@ -41,19 +41,16 @@ function RegisterPage() {
   const onClickRegister = (e) => {
     e.preventDefault();
     axios
-      .post(
-        " http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/auth",
-        {
-          account: inputId,
-          password: inputPw,
-          gender: inputGender,
-          role: "M",
-          email: inputEmail,
-          name: inputName,
-          address: inputAddress,
-          phoneNum: inputPhoneNum,
-        }
-      )
+      .post("http://54.180.53.149:8080/auth", {
+        account: inputId,
+        password: inputPw,
+        gender: inputGender,
+        role: "M",
+        email: inputEmail,
+        name: inputName,
+        address: inputAddress,
+        phoneNum: inputPhoneNum,
+      })
       .then((res) => {
         if (res.data.result === "FAIL") {
           alert("회원가입에 실패하였습니다.");

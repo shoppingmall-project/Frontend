@@ -7,13 +7,9 @@ function CommunityPage() {
   const [boards, setBoards] = useState([]);
   moment.locale("ko");
   useEffect(() => {
-    axios
-      .get(
-        "http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/board"
-      )
-      .then((res) => {
-        setBoards(res.data.data);
-      });
+    axios.get("http://54.180.53.149:8080/board").then((res) => {
+      setBoards(res.data.data);
+    });
   }, []);
   return (
     <div className={styles.page}>

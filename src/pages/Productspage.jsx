@@ -8,9 +8,7 @@ function ProductsPage() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios
-      .get(
-        "http://ec2-3-34-90-87.ap-northeast-2.compute.amazonaws.com:8080/goods"
-      )
+      .get("http://54.180.53.149:8080/goods")
       .then((res) => {
         console.log(res.data.data);
         setProducts(res.data.data);
