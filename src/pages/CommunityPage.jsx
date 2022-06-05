@@ -2,6 +2,7 @@ import styles from "./cssmodules/CommunityPage.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 function CommunityPage() {
   const [boards, setBoards] = useState([]);
@@ -46,6 +47,9 @@ function CommunityPage() {
             })}
           </tbody>
         </table>
+        <Link to="./writing">
+          <button>Post</button>
+        </Link>
       </div>
     </div>
   );
