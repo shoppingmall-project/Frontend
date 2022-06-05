@@ -1,10 +1,10 @@
+import { Link } from "react-router-dom";
 import styles from "./cssmodules/Card.module.css";
 import defaultImg from "../imgs/NoImg.png";
 
 function Card(props) {
   const { product } = props;
-  const { category, name, price, brand, country, imgUrl, description } =
-    product;
+  const { id, name, price } = product;
 
   const onErrorImg = (e) => {
     e.target.src = defaultImg;
@@ -21,12 +21,11 @@ function Card(props) {
         />
       </div>
       <div className={styles.product_descriptions}>
-        <div className={styles.product_name}>{name}</div>
+        <Link to={"./" + id}>
+          <div className={styles.product_name}>{name}</div>
+        </Link>
+
         <div className={styles.product_price}>{price}</div>
-        <div className={styles.product_description}>{description}</div>
-        <div className={styles.product_brand}>{brand}</div>
-        <div className={styles.product_country}>{country}</div>
-        <div className={styles.product_category}>{category}</div>
       </div>
     </div>
   );

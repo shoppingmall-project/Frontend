@@ -1,0 +1,69 @@
+.container {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px 40px;
+  border-radius: 5px;
+}
+
+.container .text {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.container .sm {
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  background: #fff;
+  padding: 15px;
+  font-family: inherit;
+  font-size: 16px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.text {
+  margin-top: 30px;
+}
+
+.formControl {
+  position: relative;
+  margin: 20px 0 40px;
+  width: 300px;
+}
+
+.formControl .input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px #fff solid;
+  display: block;
+  width: 100%;
+  padding: 5px 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+.formControl .input:focus,
+.formControl .input:valid {
+  outline: 0;
+  border-bottom-color: lightblue;
+}
+
+.formControl .label {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  pointer-events: none;
+}
