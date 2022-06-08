@@ -41,7 +41,7 @@ function MyPage() {
           address: inputAddress,
           phoneNum: inputPhoneNum,
         },
-        { jwtToken: sessionStorage.getItem("jwtToken") }
+        { headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") } }
       )
       .then((res) => {
         console.log(res);
@@ -59,7 +59,9 @@ function MyPage() {
   const onClickDelete = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://54.180.53.149:8080/auth/${inputId}`)
+      .delete(`http://54.180.53.149:8080/auth/${inputId}`, {
+        headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") },
+      })
       .then((res) => {
         if (res.data.result === "FAIL") {
           alert("회원 탈퇴에 실패하였습니다.");
@@ -75,7 +77,9 @@ function MyPage() {
   useEffect(() => {
     setInputId(sessionStorage.getItem("id"));
     axios
-      .get(`http://54.180.53.149:8080/auth/${inputId}`)
+      .get(`http://54.180.53.149:8080/auth/${inputId}`, {
+        headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") },
+      })
       .catch((err) => console.log(err))
       .then((res) => {
         const user = res.data.data;
