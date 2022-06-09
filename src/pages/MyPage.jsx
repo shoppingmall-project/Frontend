@@ -49,8 +49,7 @@ function MyPage() {
           alert("회원정보 수정에 실패하였습니다.");
         } else {
           alert("회원정보 수정 성공");
-          sessionStorage.clear();
-          document.location.href = "/login";
+          document.location.href = "/";
         }
       })
       .catch();
@@ -68,10 +67,10 @@ function MyPage() {
         } else {
           alert("회원 탈퇴 성공");
           sessionStorage.clear();
+          document.location.href = "/";
         }
       })
       .catch();
-    document.location.href = "/";
   };
 
   useEffect(() => {
@@ -115,7 +114,6 @@ function MyPage() {
             <input
               className={styles.input}
               type="password"
-              value={inputPw}
               onChange={handleInputPw}
               required
             />
@@ -169,7 +167,6 @@ function MyPage() {
               </label>
             </div>
           </div>
-
           <div className={styles.formControl}>
             <label htmlFor="input_address">Address</label>
             <input
