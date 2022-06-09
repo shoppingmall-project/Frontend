@@ -9,6 +9,7 @@ function CommunityPage() {
   moment.locale("ko");
   useEffect(() => {
     axios.get("http://54.180.53.149:8080/board").then((res) => {
+      console.log(res);
       setBoards(res.data.data);
     });
   }, []);
@@ -39,7 +40,7 @@ function CommunityPage() {
                 <tr key={board.boardId}>
                   <td>{board.boardId}</td>
                   <td>{board.title}</td>
-                  <td>{board.author}</td>
+                  <td>{board.writer}</td>
                   <td>{board.views}</td>
                   <td>{moment(board.createdDate).format("lll")}</td>
                 </tr>
