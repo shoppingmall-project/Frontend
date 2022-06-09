@@ -45,7 +45,7 @@ function RegisterPage() {
         account: inputId,
         password: inputPw,
         gender: inputGender,
-        role: "M",
+        role: "U",
         email: inputEmail,
         name: inputName,
         address: inputAddress,
