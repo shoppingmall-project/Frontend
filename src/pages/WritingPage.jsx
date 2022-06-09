@@ -19,12 +19,15 @@ function LoginPage() {
     e.preventDefault();
     console.log(inputTitle, inputContent);
     axios
-      .post("http://54.180.53.149:8080/board", {
-        title: inputTitle,
-        content: inputContent,
-      })
+      .post(
+        "http://54.180.53.149:8080/board",
+        {
+          title: inputTitle,
+          content: inputContent,
+        },
+        { headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") } }
+      )
       .then((res) => {
-        console.log(res);
         if (res.data.result === "FAIL") {
           alert("작성에 실패하였습니다.");
         } else {
