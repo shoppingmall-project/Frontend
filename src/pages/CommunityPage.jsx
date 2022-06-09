@@ -1,12 +1,11 @@
 import styles from "./cssmodules/CommunityPage.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import moment from "moment";
+import moment from "moment-timezone";
 import { Link } from "react-router-dom";
 
 function CommunityPage() {
   const [boards, setBoards] = useState([]);
-  moment.locale("ko");
   useEffect(() => {
     axios.get("http://54.180.53.149:8080/board").then((res) => {
       setBoards(res.data.data);
@@ -39,12 +38,14 @@ function CommunityPage() {
               return (
                 <tr key={board.boardId}>
                   <td>{board.boardId}</td>
-                  <Link to={"./" + board.boardId}>
-                    <td>{board.title}</td>
-                  </Link>
+                  <td>
+                    <Link to={"./" + board.boardId}>{board.title}</Link>
+                  </td>
                   <td>{board.writer}</td>
                   <td>{board.views}</td>
-                  <td>{moment(board.createdDate).format("lll")}</td>
+                  <td>
+                    {moment(board.createdDate).add(9, "hours").format("lll")}
+                  </td>
                 </tr>
               );
             })}
