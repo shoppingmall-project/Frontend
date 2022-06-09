@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import CommunityPage from "./pages/CommunityPage";
 import WritingPage from "./pages/WritingPage";
+import BoardPage from "./pages/BoardPage";
 
 import { useEffect, useState } from "react";
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="/products/:productid" element={<ProductPage />}></Route>
           <Route path="/community" element={<CommunityPage />}></Route>
           <Route path="/community/writing" element={<WritingPage />}></Route>
+          <Route path="/community/:id" element={<BoardPage />}></Route>
           <Route
             path="/login"
             element={<LoginPage isLogin={isLogin} setIsLogin={setIsLogin} />}
