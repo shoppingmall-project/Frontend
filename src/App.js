@@ -8,6 +8,7 @@ import ProductPage from "./pages/ProductPage";
 import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ManagerPage from "./pages/ManagerPage";
 import CommunityPage from "./pages/CommunityPage";
 import WritingPage from "./pages/WritingPage";
 import BoardPage from "./pages/BoardPage";
@@ -32,6 +33,7 @@ function App() {
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/products" element={<ProductsPage />}></Route>
           <Route path="/products/:productid" element={<ProductPage />}></Route>
+          <Route path="/manager" element={<ManagerPage />}></Route>
           <Route path="/community" element={<CommunityPage />}></Route>
           <Route path="/community/writing" element={<WritingPage />}></Route>
           <Route path="/community/:id" element={<BoardPage />}></Route>
