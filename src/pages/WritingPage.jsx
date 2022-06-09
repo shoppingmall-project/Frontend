@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "./cssmodules/LoginPage.module.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import axios from "axios";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [inputTitle, setInputTitle] = useState("");
   const [inputContent, setInputContent] = useState("");
 
@@ -31,7 +33,7 @@ function LoginPage() {
         if (res.data.result === "FAIL") {
           alert("작성에 실패하였습니다.");
         } else {
-          document.location.href = "/community";
+          navigate(-1);
         }
       })
       .catch();

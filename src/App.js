@@ -34,6 +34,8 @@ function App() {
           <Route path="/products" element={<ProductsPage />}></Route>
           <Route path="/products/:productid" element={<ProductPage />}></Route>
           <Route path="/manager" element={<ManagerPage />}></Route>
+          <Route path="/manager/products" element={<ManagerPage />}></Route>
+          <Route path="/manager/community" element={<ManagerPage />}></Route>
           <Route path="/community" element={<CommunityPage />}></Route>
           <Route path="/community/writing" element={<WritingPage />}></Route>
           <Route path="/community/:id" element={<BoardPage />}></Route>
