@@ -3,43 +3,36 @@ import styles from "./cssmodules/RegisterPage.module.css";
 import axios from "axios";
 
 function MyPage() {
-  const [inputId, setInputId] = useState(0);
-  const [inputAccount, setInputAccount] = useState("");
-  const [inputPw, setInputPw] = useState("");
-  const [inputGender, setInputGender] = useState("");
-  const [inputName, setInputName] = useState("");
-  const [inputEmail, setInputEmail] = useState("");
-  const [inputAddress, setInputAddress] = useState("");
-  const [inputPhoneNum, setInputPhoneNum] = useState("");
-  const [role, setRole] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [inputs, setInputs] = useState({
+    id: 0,
+    account: "",
+    pw: "",
+    gender: "",
+    name: "",
+    email: "",
+    address: "",
+    phoneNum: "",
+    role: "",
+  });
+  const { id, account, pw, gender, name, email, address, phoneNum, role } =
+    inputs;
 
-  const handleInputPw = (e) => {
-    setInputPw(e.target.value);
-  };
-
-  const handleInputEmail = (e) => {
-    setInputEmail(e.target.value);
-  };
-
-  const handleInputAddress = (e) => {
-    setInputAddress(e.target.value);
-  };
-
-  const handleInputPhoneNum = (e) => {
-    setInputPhoneNum(e.target.value);
+  const onChange = (e) => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
   const onClickModify = (e) => {
     e.preventDefault();
     axios
       .put(
-        `http://54.180.53.149:8080/auth/${inputId}`,
+        `http://54.180.53.149:8080/auth/${id}`,
         {
-          password: inputPw,
+          password: pw,
           role: role,
-          email: inputEmail,
-          address: inputAddress,
-          phoneNum: inputPhoneNum,
+          email: email,
+          phoneNum: phoneNum,
+          address: address,
         },
         { headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") } }
       )
@@ -58,7 +51,7 @@ function MyPage() {
   const onClickDelete = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://54.180.53.149:8080/auth/${inputId}`, {
+      .delete(`http://54.180.53.149:8080/auth/${id}`, {
         headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") },
       })
       .then((res) => {
@@ -74,130 +67,146 @@ function MyPage() {
   };
 
   useEffect(() => {
-    setInputId(sessionStorage.getItem("id"));
+    let id = sessionStorage.getItem("id");
+    setInputs({ ...inputs, id });
     axios
-      .get(`http://54.180.53.149:8080/auth/${inputId}`, {
+      .get(`http://54.180.53.149:8080/auth/${id}`, {
         headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") },
       })
       .catch((err) => console.log(err))
       .then((res) => {
         const user = res.data.data;
-        setInputAccount(user?.account);
-        setInputAddress(user?.address);
-        setInputEmail(user?.email);
-        setInputGender(user?.gender);
-        setInputPhoneNum(user?.phoneNum);
-        setInputName(user?.name);
-        setRole(user?.role);
+        const { id, account, address, email, gender, phoneNum, name, role } =
+          user;
+        setInputs({
+          ...inputs,
+          id,
+          account,
+          address,
+          email,
+          gender,
+          phoneNum,
+          name,
+          role,
+        });
       });
-  }, [inputId]);
+    setIsLoading(true);
+  }, []);
 
   return (
-    <div className="page">
-      <div className={styles.container}>
-        <div className={styles.text}>My Info</div>
-        <form>
-          <div className={styles.formControl}>
-            <label htmlFor="account" className={styles.text}>
-              Account
-            </label>
-            <input
-              className={styles.input}
-              id="account"
-              type="text"
-              value={inputAccount}
-              readOnly
-            />
-          </div>
-          <div className={styles.formControl}>
-            <label htmlFor="input_pw">Password</label>
-            <input
-              className={styles.input}
-              type="password"
-              onChange={handleInputPw}
-              required
-            />
-          </div>
-
-          <div className={styles.formControl}>
-            <label htmlFor="input_name">Name</label>
-            <input
-              className={styles.input}
-              type="name"
-              value={inputName}
-              readOnly
-            />
-          </div>
-
-          <div className={styles.formControl}>
-            <label htmlFor="input_email">email</label>
-            <input
-              className={styles.input}
-              type="email"
-              value={inputEmail}
-              onChange={handleInputEmail}
-              required
-            />
-          </div>
-
-          <div className={styles.formControl}>
-            <label htmlFor="input_gender">Gender</label>
-            <div className="radio">
-              <label className={styles.radioBtn}>
-                <input
-                  type="radio"
-                  id="male"
-                  value="M"
-                  name="gender"
-                  checked={inputGender === "M"}
-                  readOnly
-                />
-                남
+    isLoading && (
+      <div className="page">
+        <div className={styles.container}>
+          <div className={styles.text}>My Info</div>
+          <form>
+            <div className={styles.formControl}>
+              <label htmlFor="account" className={styles.text}>
+                Account
               </label>
-              <label className={styles.radioBtn}>
-                <input
-                  type="radio"
-                  value="F"
-                  id="female"
-                  name="gender"
-                  checked={inputGender === "F"}
-                  readOnly
-                />
-                여
-              </label>
+              <input
+                className={styles.input}
+                id="account"
+                name="account"
+                type="text"
+                value={account}
+                readOnly
+              />
             </div>
-          </div>
-          <div className={styles.formControl}>
-            <label htmlFor="input_address">Address</label>
-            <input
-              className={styles.input}
-              type="text"
-              value={inputAddress}
-              onChange={handleInputAddress}
-              required
-            />
-          </div>
+            <div className={styles.formControl}>
+              <label htmlFor="input_pw">Password</label>
+              <input
+                className={styles.input}
+                name="pw"
+                type="password"
+                onChange={onChange}
+                required
+              />
+            </div>
 
-          <div className={styles.formControl}>
-            <label htmlFor="input_phoneNum">Phone Number</label>
-            <input
-              className={styles.input}
-              type="text"
-              value={inputPhoneNum}
-              onChange={handleInputPhoneNum}
-              required
-            />
-          </div>
+            <div className={styles.formControl}>
+              <label htmlFor="input_name">Name</label>
+              <input
+                className={styles.input}
+                name="name"
+                type="name"
+                value={name}
+                readOnly
+              />
+            </div>
 
-          <button className={styles.btn} onClick={onClickModify}>
-            Modify
-          </button>
-          <button className={styles.btn} onClick={onClickDelete}>
-            Delete
-          </button>
-        </form>
+            <div className={styles.formControl}>
+              <label htmlFor="input_email">email</label>
+              <input
+                className={styles.input}
+                name="email"
+                type="email"
+                value={email}
+                onChange={onChange}
+                required
+              />
+            </div>
+
+            <div className={styles.formControl}>
+              <label htmlFor="input_gender">Gender</label>
+              <div className="radio">
+                <label className={styles.radioBtn}>
+                  <input
+                    type="radio"
+                    id="male"
+                    value="M"
+                    name="gender"
+                    checked={gender === "M"}
+                    readOnly
+                  />
+                  남
+                </label>
+                <label className={styles.radioBtn}>
+                  <input
+                    type="radio"
+                    value="F"
+                    id="female"
+                    name="gender"
+                    checked={gender === "F"}
+                    readOnly
+                  />
+                  여
+                </label>
+              </div>
+            </div>
+            <div className={styles.formControl}>
+              <label htmlFor="input_address">Address</label>
+              <input
+                className={styles.input}
+                name="address"
+                type="text"
+                value={address}
+                onChange={onChange}
+                required
+              />
+            </div>
+
+            <div className={styles.formControl}>
+              <label htmlFor="input_phoneNum">Phone Number</label>
+              <input
+                className={styles.input}
+                name="phoneNum"
+                type="text"
+                value={phoneNum}
+                onChange={onChange}
+                required
+              />
+            </div>
+
+            <button className={styles.btn} onClick={onClickModify}>
+              Modify
+            </button>
+            <button className={styles.btn} onClick={onClickDelete}>
+              Delete
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    )
   );
 }
 
