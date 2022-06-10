@@ -1,13 +1,15 @@
 import styles from "./cssmodules/CommunityPage.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import moment from "moment";
+import moment from "moment-timezone";
 import { Link, useParams } from "react-router-dom";
 
 function BoardPage() {
   const [board, setBoard] = useState(0);
+  const [isWriter, setIsWriter] = useState(false);
+  const [isManager, setIsManager] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   let { id } = useParams();
-  moment.locale("ko");
 
   const onClickDelete = (e) => {
     e.preventDefault();
@@ -27,6 +29,14 @@ function BoardPage() {
   };
 
   useEffect(() => {
+    let userId = sessionStorage?.getItem("id");
+    axios
+      .get(`http://54.180.53.149:8080/auth/${userId}`, {
+        headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") },
+      })
+      .then((res) => {
+        console.log(res);
+      });
     axios
       .get(`http://54.180.53.149:8080/board/${id}`)
       .then((res) => setBoard(res.data.data));
@@ -38,6 +48,9 @@ function BoardPage() {
       <div className={styles.container}>writer:{board.writer}</div>
       <div className={styles.container}>content:{board.content}</div>
       <div className={styles.container}>views:{board.views}</div>
+      <div className={styles.container}>
+        createdAt:{moment(board.createdDate).add(9, "hours").format("lll")}
+      </div>
       <div>
         <button>Modify</button>
         <button onClick={onClickDelete}>Delete</button>
