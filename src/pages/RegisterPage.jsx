@@ -3,53 +3,34 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function RegisterPage() {
-  const [inputId, setInputId] = useState("");
-  const [inputPw, setInputPw] = useState("");
-  const [inputGender, setInputGender] = useState("");
-  const [inputName, setInputName] = useState("");
-  const [inputEmail, setInputEmail] = useState("");
-  const [inputAddress, setInputAddress] = useState("");
-  const [inputPhoneNum, setInputPhoneNum] = useState("");
+  const [inputs, setInputs] = useState({
+    id: "",
+    pw: "",
+    gender: "",
+    name: "",
+    email: "",
+    address: "",
+    phoneNum: "",
+  });
 
-  const handleInputId = (e) => {
-    setInputId(e.target.value);
-  };
+  const { id, pw, gender, name, email, address, phoneNum } = inputs;
 
-  const handleInputPw = (e) => {
-    setInputPw(e.target.value);
-  };
-
-  const handleInputGender = (e) => {
-    setInputGender(e.target.value);
-  };
-
-  const handleInputName = (e) => {
-    setInputName(e.target.value);
-  };
-  const handleInputEmail = (e) => {
-    setInputEmail(e.target.value);
-  };
-
-  const handleInputAddress = (e) => {
-    setInputAddress(e.target.value);
-  };
-
-  const handleInputPhoneNum = (e) => {
-    setInputPhoneNum(e.target.value);
+  const onChange = (e) => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
   const onClickRegister = (e) => {
     e.preventDefault();
     axios
       .post("http://54.180.53.149:8080/auth", {
-        account: inputId,
-        password: inputPw,
-        gender: inputGender,
+        account: id,
+        password: pw,
+        gender: gender,
         role: "U",
-        email: inputEmail,
-        name: inputName,
-        address: inputAddress,
-        phoneNum: inputPhoneNum,
+        email: email,
+        name: name,
+        address: address,
+        phoneNum: phoneNum,
       })
       .then((res) => {
         if (res.data.result === "FAIL") {
@@ -77,8 +58,9 @@ function RegisterPage() {
               className={styles.input}
               id="account"
               type="text"
-              value={inputId}
-              onChange={handleInputId}
+              name="id"
+              value={id}
+              onChange={onChange}
               required
             />
           </div>
@@ -88,36 +70,39 @@ function RegisterPage() {
             <input
               className={styles.input}
               type="password"
-              value={inputPw}
-              onChange={handleInputPw}
+              value={pw}
+              name="pw"
+              onChange={onChange}
               required
             />
           </div>
 
           <div className={styles.formControl}>
-            <label htmlFor="input_pw">Name</label>
+            <label htmlFor="input_name">Name</label>
             <input
               className={styles.input}
-              type="name"
-              value={inputName}
-              onChange={handleInputName}
+              type="text"
+              value={name}
+              name="name"
+              onChange={onChange}
               required
             />
           </div>
 
           <div className={styles.formControl}>
-            <label htmlFor="input_pw">email</label>
+            <label htmlFor="input_email">email</label>
             <input
               className={styles.input}
               type="email"
-              value={inputEmail}
-              onChange={handleInputEmail}
+              name="email"
+              value={email}
+              onChange={onChange}
               required
             />
           </div>
 
           <div className={styles.formControl}>
-            <label htmlFor="input_pw">Gender</label>
+            <label htmlFor="input_gender">Gender</label>
             <div className="radio">
               <label className={styles.radioBtn}>
                 <input
@@ -125,8 +110,8 @@ function RegisterPage() {
                   id="male"
                   value="M"
                   name="gender"
-                  onChange={handleInputGender}
-                  checked={inputGender === "M"}
+                  onChange={onChange}
+                  checked={gender === "M"}
                 />
                 남
               </label>
@@ -136,8 +121,8 @@ function RegisterPage() {
                   value="F"
                   id="female"
                   name="gender"
-                  onChange={handleInputGender}
-                  checked={inputGender === "F"}
+                  onChange={onChange}
+                  checked={gender === "F"}
                 />
                 여
               </label>
@@ -149,8 +134,9 @@ function RegisterPage() {
             <input
               className={styles.input}
               type="text"
-              value={inputAddress}
-              onChange={handleInputAddress}
+              name="address"
+              value={address}
+              onChange={onChange}
               required
             />
           </div>
@@ -160,8 +146,9 @@ function RegisterPage() {
             <input
               className={styles.input}
               type="text"
-              value={inputPhoneNum}
-              onChange={handleInputPhoneNum}
+              name="phoneNum"
+              value={phoneNum}
+              onChange={onChange}
               required
             />
           </div>
