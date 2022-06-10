@@ -7,13 +7,15 @@ function Header() {
   const [isManager, setIsManager] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("jwtToken")) setIsLogin(true);
-    axios
-      .get(`http://54.180.53.149:8080/auth/${sessionStorage.getItem("id")}`)
-      .then((res) => {
-        if (res.data.data.role === "M") setIsManager(true);
-      })
-      .catch();
+    if (sessionStorage.getItem("jwtToken")) {
+      setIsLogin(true);
+      axios
+        .get(`http://54.180.53.149:8080/auth/${sessionStorage.getItem("id")}`)
+        .then((res) => {
+          if (res.data.data.role === "M") setIsManager(true);
+        })
+        .catch();
+    }
   }, []);
 
   return (
