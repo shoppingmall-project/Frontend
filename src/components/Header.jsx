@@ -41,6 +41,11 @@ function Header() {
                 Community
               </Link>
             </li>
+            <li>
+              <Link to={"/QA"} className="navLink">
+                QA
+              </Link>
+            </li>
             {isManager === true ? (
               <>
                 <li>
