@@ -13,6 +13,7 @@ import CommunityPage from "./pages/CommunityPage";
 import WritingPage from "./pages/WritingPage";
 import BoardPage from "./pages/BoardPage";
 import QAPage from "./pages/QAPage";
+import QuestionPage from "./pages/QuestionPage";
 
 import { useEffect, useState } from "react";
 
@@ -38,7 +39,7 @@ function App() {
           <Route path="/manager/products" element={<ManagerPage />}></Route>
           <Route path="/manager/community" element={<ManagerPage />}></Route>
           <Route path="/QA" element={<QAPage />}></Route>
-          <Route path="/QA/:id" element={<BoardPage />}></Route>
+          <Route path="/QA/:id" element={<QuestionPage />}></Route>
           <Route path="/community" element={<CommunityPage />}></Route>
           <Route path="/community/writing" element={<WritingPage />}></Route>
           <Route path="/community/:id" element={<BoardPage />}></Route>
