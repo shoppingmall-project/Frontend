@@ -5,7 +5,7 @@ import moment from "moment-timezone";
 import { Link, useParams } from "react-router-dom";
 
 function BoardPage() {
-  const [board, setBoard] = useState(0);
+  const [board, setBoard] = useState({});
   const [isWriter, setIsWriter] = useState(false);
   const [isManager, setIsManager] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,33 +29,50 @@ function BoardPage() {
   };
 
   useEffect(() => {
-    let userId = sessionStorage?.getItem("id");
-    axios
-      .get(`http://54.180.53.149:8080/auth/${userId}`, {
-        headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") },
-      })
-      .then((res) => {
-        console.log(res);
-      });
+    let userId = sessionStorage.getItem("id");
     axios
       .get(`http://54.180.53.149:8080/board/${id}`)
-      .then((res) => setBoard(res.data.data));
-  }, []);
+      .then((res) => {
+        setBoard(res.data.data);
+        if (board.memberId === +userId) setIsWriter(true);
+        console.log(board.memberId);
+        console.log(+userId);
+      })
+      .then(() => {
+        if (userId) {
+          axios
+            .get(`http://54.180.53.149:8080/auth/${userId}`, {
+              headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") },
+            })
+            .then((res) => {
+              if (res.data.data.role === "M") setIsManager(true);
+              setIsLoading(true);
+              console.log(isWriter, isManager, isLoading);
+            });
+        }
+      });
+  }, [board.boardId]);
 
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>title:{board.title}</div>
-      <div className={styles.container}>writer:{board.writer}</div>
-      <div className={styles.container}>content:{board.content}</div>
-      <div className={styles.container}>views:{board.views}</div>
-      <div className={styles.container}>
-        createdAt:{moment(board.createdDate).add(9, "hours").format("lll")}
+    isLoading && (
+      <div className={styles.page}>
+        <div className={styles.container}>title:{board.title}</div>
+        <div className={styles.container}>writer:{board.writer}</div>
+        <div className={styles.container}>content:{board.content}</div>
+        <div className={styles.container}>views:{board.views}</div>
+        <div className={styles.container}>
+          createdAt:{moment(board.createdDate).add(9, "hours").format("lll")}
+        </div>
+        <div>
+          {(isManager || isWriter) && (
+            <>
+              <button>Modify</button>
+              <button onClick={onClickDelete}>Delete</button>
+            </>
+          )}
+        </div>
       </div>
-      <div>
-        <button>Modify</button>
-        <button onClick={onClickDelete}>Delete</button>
-      </div>
-    </div>
+    )
   );
 }
 
