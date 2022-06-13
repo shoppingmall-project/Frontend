@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 
-function WritingPage() {
+function QuestionWritingPage() {
   const navigate = useNavigate();
   const [inputTitle, setInputTitle] = useState("");
   const [inputContent, setInputContent] = useState("");
@@ -22,7 +22,7 @@ function WritingPage() {
     console.log(inputTitle, inputContent);
     axios
       .post(
-        "http://54.180.53.149:8080/board",
+        "http://54.180.53.149:8080/question",
         {
           title: inputTitle,
           content: inputContent,
@@ -76,4 +76,4 @@ function WritingPage() {
   );
 }
 
-export default WritingPage;
+export default QuestionWritingPage;
