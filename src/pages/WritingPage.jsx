@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 
-function LoginPage() {
+function WritingPage() {
   const navigate = useNavigate();
   const [inputTitle, setInputTitle] = useState("");
   const [inputContent, setInputContent] = useState("");
@@ -83,4 +83,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default WritingPage;
