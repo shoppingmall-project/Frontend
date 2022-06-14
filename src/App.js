@@ -10,11 +10,13 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ManagerPage from "./pages/ManagerPage";
 import CommunityPage from "./pages/CommunityPage";
-import WritingPage from "./pages/WritingPage";
 import BoardPage from "./pages/BoardPage";
+import BoardModifyPage from "./pages/BoardModifyPage";
+import WritingPage from "./pages/WritingPage";
 import QAPage from "./pages/QAPage";
 import QuestionPage from "./pages/QuestionPage";
 import QuestionWritingPage from "./pages/QuestionWritingPage";
+import QuestionModifyPage from "./pages/QuestionModifyPage";
 
 import { useEffect, useState } from "react";
 
@@ -42,6 +44,7 @@ function App() {
           <Route path="/QA" element={<QAPage />}></Route>
           <Route path="/QA/writing" element={<QuestionWritingPage />}></Route>
           <Route path="/QA/:id" element={<QuestionPage />}></Route>
+          <Route path="/QA/:id/modify" element={<QuestionModifyPage />}></Route>
           <Route
             path="/community/writing"
             element={<QuestionWritingPage />}
@@ -49,6 +52,10 @@ function App() {
           <Route path="/community" element={<CommunityPage />}></Route>
           <Route path="/community/writing" element={<WritingPage />}></Route>
           <Route path="/community/:id" element={<BoardPage />}></Route>
+          <Route
+            path="/community/:id/modify"
+            element={<BoardModifyPage />}
+          ></Route>
           <Route
             path="/login"
             element={<LoginPage isLogin={isLogin} setIsLogin={setIsLogin} />}

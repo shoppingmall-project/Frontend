@@ -35,22 +35,18 @@ function BoardPage() {
       .then((res) => {
         setBoard(res.data.data);
         if (board.memberId === +userId) setIsWriter(true);
-        console.log(board.memberId);
-        console.log(+userId);
       })
       .then(() => {
-        if (userId) {
-          axios
-            .get(`http://54.180.53.149:8080/auth/${userId}`, {
-              headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") },
-            })
-            .then((res) => {
-              if (res.data.data.role === "M") setIsManager(true);
-              setIsLoading(true);
-              console.log(isWriter, isManager, isLoading);
-            });
-        }
+        axios
+          .get(`http://54.180.53.149:8080/auth/${userId}`, {
+            headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") },
+          })
+          .then((res) => {
+            if (res.data.data?.role === "M") setIsManager(true);
+            console.log(isWriter, isManager, isLoading);
+          });
       });
+    setIsLoading(true);
   }, [board.boardId]);
 
   return (
@@ -66,7 +62,9 @@ function BoardPage() {
         <div>
           {(isManager || isWriter) && (
             <>
-              <button>Modify</button>
+              <Link to="./modify">
+                <button>Modify</button>
+              </Link>
               <button onClick={onClickDelete}>Delete</button>
             </>
           )}
