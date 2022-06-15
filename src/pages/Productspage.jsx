@@ -1,5 +1,6 @@
 import axios from "axios";
 import styles from "./cssmodules/ProductsPage.module.css";
+import { Link } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
@@ -22,6 +23,9 @@ function ProductsPage() {
           <Card product={product} key={product.id} />
         ))}
       </div>
+      <Link to="./add">
+        <button>add</button>
+      </Link>
     </div>
   );
 }

@@ -17,6 +17,7 @@ import QAPage from "./pages/QAPage";
 import QuestionPage from "./pages/QuestionPage";
 import QuestionWritingPage from "./pages/QuestionWritingPage";
 import QuestionModifyPage from "./pages/QuestionModifyPage";
+import AddProductPage from "./pages/AddProductPage";
 
 import { useEffect, useState } from "react";
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/products" element={<ProductsPage />}></Route>
+          <Route path="/products/add" element={<AddProductPage />}></Route>
           <Route path="/products/:productid" element={<ProductPage />}></Route>
           <Route path="/manager" element={<ManagerPage />}></Route>
           <Route path="/manager/products" element={<ManagerPage />}></Route>
