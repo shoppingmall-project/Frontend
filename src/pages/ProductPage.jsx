@@ -1,12 +1,19 @@
 import axios from "axios";
 import styles from "./cssmodules/LoginPage.module.css";
 import { useState, useEffect } from "react";
+import defaultImg from "../imgs/NoImg.png";
 
 import { useParams } from "react-router";
 
 function ProductPage() {
   const [product, setProduct] = useState({});
   const { productid } = useParams();
+
+  const handleImgError = (e) => {
+    this.onError = null;
+    e.target.src = defaultImg;
+  };
+
   useEffect(() => {
     console.log(`http://54.180.53.149:8080/goods/${productid}`);
     axios
@@ -20,7 +27,7 @@ function ProductPage() {
 
   return (
     <div className="page">
-      <img src={product.imageUrl} alt="사진" />
+      <img src={product.imageUrl} alt="사진" onError={handleImgError} />
       <div>제품번호:{product.id}</div>
       <div>카테고리:{product.category}</div>
       <div>제품명:{product.name}</div>
