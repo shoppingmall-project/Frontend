@@ -26,7 +26,11 @@ function ProductPage() {
 
   return (
     <div className="page">
-      <img src={product.imageUrl} alt="사진" onError={handleImgError} />
+      <img
+        src={require(product.imageUrl)}
+        alt="사진"
+        onError={handleImgError}
+      />
       <div>제품번호:{product.id}</div>
       <div>카테고리:{product.category}</div>
       <div>제품명:{product.name}</div>
