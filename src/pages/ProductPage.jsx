@@ -10,17 +10,16 @@ function ProductPage() {
   const { productid } = useParams();
 
   const handleImgError = (e) => {
-    this.onError = null;
     e.target.src = defaultImg;
   };
 
   useEffect(() => {
-    console.log(`http://54.180.53.149:8080/goods/${productid}`);
     axios
       .get(`http://54.180.53.149:8080/goods/${productid}`)
       .then((res) => {
         console.log(res.data.data);
         setProduct(res.data.data);
+        console.log(product.imageUrl);
       })
       .catch();
   }, []);
