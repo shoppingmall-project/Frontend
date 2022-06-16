@@ -17,9 +17,7 @@ function ProductPage() {
     axios
       .get(`http://54.180.53.149:8080/goods/${productid}`)
       .then((res) => {
-        console.log(res.data.data);
         setProduct(res.data.data);
-        console.log(product.imageUrl);
       })
       .catch();
   }, []);
