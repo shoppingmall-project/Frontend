@@ -15,7 +15,10 @@ function Card(props) {
       <div className={styles.img_container}>
         <img
           className={styles.img}
-          src={defaultImg}
+          src={
+            "https://wineshoppingmall.s3.ap-northeast-2.amazonaws.com/" +
+            product.imageUrl.substring(25)
+          }
           alt={name}
           onError={onErrorImg}
         />
