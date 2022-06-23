@@ -15,6 +15,9 @@ function Header() {
           if (res.data.data.role === "M") setIsManager(true);
         })
         .catch();
+    } else {
+      setIsLogin(false);
+      setIsManager(false);
     }
   }, []);
 
@@ -53,11 +56,6 @@ function Header() {
                 <li>
                   <Link to={"/manager"} className="navLink">
                     manager
-                  </Link>
-                </li>
-                <li>
-                  <Link to={"/myPage"} className="navLink">
-                    My Page
                   </Link>
                 </li>
               </>
