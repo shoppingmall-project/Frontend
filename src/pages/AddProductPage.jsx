@@ -5,7 +5,7 @@ import styles from "./cssmodules/RegisterPage.module.css";
 
 function AddProductPage() {
   const [inputs, setInputs] = useState({
-    category: "",
+    category: "Red Wine",
     name: "",
     price: "",
     stock: "",
@@ -14,8 +14,6 @@ function AddProductPage() {
     country: "",
   });
   const [inputFile, setInputFile] = useState(undefined);
-
-  const { category, name, price, stock, description, brand, country } = inputs;
 
   const onChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -27,25 +25,28 @@ function AddProductPage() {
 
   const onClickRegister = (e) => {
     e.preventDefault();
+    const { category, name, price, stock, description, brand, country } =
+      inputs;
+    const formData = new FormData();
+    formData.append("category", category);
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("stock", stock);
+    formData.append("description", description);
+    formData.append("brand", brand);
+    formData.append("country", country);
+    formData.append("file", inputFile);
+
     axios
-      .post(
-        "http://54.180.53.149:8080/goods",
-        {
-          category: category,
-          name: name,
-          price: price,
-          stock: stock,
-          description: description,
-          brand: brand,
-          country: country,
-          file: inputFile,
+      .post("http://54.180.53.149:8080/goods", formData, {
+        headers: {
+          "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken"),
+          "Content-Type": "multipart/form-data",
         },
-        {
-          headers: { "X-AUTH-TOKEN": sessionStorage.getItem("jwtToken") },
-        }
-      )
+      })
       .then((res) => {
         if (res.data.result === "FAIL") {
+          console.log(res);
           alert("상품 등록에 실패하였습니다.");
         } else {
           alert("상품 등록에 성공하였습니다.");
@@ -82,7 +83,7 @@ function AddProductPage() {
             <input
               className={styles.input}
               type="name"
-              value={name}
+              value={inputs.name}
               name="name"
               onChange={onChange}
               required
@@ -93,7 +94,7 @@ function AddProductPage() {
             <input
               className={styles.input}
               type="number"
-              value={price}
+              value={inputs.price}
               name="price"
               onChange={onChange}
               required
@@ -106,7 +107,7 @@ function AddProductPage() {
               className={styles.input}
               type="number"
               name="stock"
-              value={stock}
+              value={inputs.stock}
               onChange={onChange}
               required
             />
@@ -116,7 +117,7 @@ function AddProductPage() {
             <textarea
               className={styles.input}
               name="description"
-              value={description}
+              value={inputs.description}
               onChange={onChange}
               required
             />
@@ -128,7 +129,7 @@ function AddProductPage() {
               className={styles.input}
               type="text"
               name="brand"
-              value={brand}
+              value={inputs.brand}
               onChange={onChange}
               required
             />
@@ -140,7 +141,7 @@ function AddProductPage() {
               className={styles.input}
               type="text"
               name="country"
-              value={country}
+              value={inputs.country}
               onChange={onChange}
               required
             />
