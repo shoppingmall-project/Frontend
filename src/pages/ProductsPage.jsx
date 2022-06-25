@@ -7,6 +7,7 @@ import Card from "../components/Card";
 
 function ProductsPage() {
   const [products, setProducts] = useState([]);
+  const [isManager, setIsManager] = useState(false);
   useEffect(() => {
     axios
       .get("http://54.180.53.149:8080/goods")
@@ -14,6 +15,17 @@ function ProductsPage() {
         setProducts(res.data.data);
       })
       .catch();
+    if (sessionStorage.getItem("jwtToken")) {
+      axios
+        .get(`http://54.180.53.149:8080/auth/${sessionStorage.getItem("id")}`)
+        .then((res) => {
+          if (res.data.data.role === "M") setIsManager(true);
+        })
+        .catch();
+    } else {
+      setIsManager(false);
+    }
+    console.log(isManager);
   }, []);
 
   return (
@@ -23,9 +35,11 @@ function ProductsPage() {
           <Card product={product} key={product.id} />
         ))}
       </div>
-      <Link to="./add">
-        <button>add</button>
-      </Link>
+      {isManager && (
+        <Link to="./add">
+          <button>add</button>
+        </Link>
+      )}
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import axios from "axios";
-import styles from "./cssmodules/LoginPage.module.css";
 import { useState, useEffect } from "react";
 import defaultImg from "../imgs/NoImg.png";
 
