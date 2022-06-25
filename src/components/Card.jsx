@@ -10,7 +10,6 @@ function Card(props) {
     e.target.src = defaultImg;
   };
 
-  const onClickOrder = () => {};
   return (
     <div className={styles.card_container}>
       <div className={styles.img_container}>
