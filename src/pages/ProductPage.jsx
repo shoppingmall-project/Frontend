@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import defaultImg from "../imgs/NoImg.png";
+import { Link } from "react-router-dom";
 
 import { useParams } from "react-router";
 
@@ -53,7 +54,9 @@ function ProductPage() {
         <div>재고:{product.stock}</div>
         <div>판매자:{product.seller}</div>
         <div>{product.description}</div>
-        <button>Order</button>
+        <Link to="./order">
+          <button>Order</button>
+        </Link>
         <button>Add to Cart</button>
       </div>
     )

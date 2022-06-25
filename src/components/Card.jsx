@@ -30,7 +30,9 @@ function Card(props) {
         </Link>
 
         <div className={styles.product_price}>{price}</div>
-        <button>Order</button>
+        <Link to={"./" + id + "/order"}>
+          <button>Order</button>
+        </Link>
         <button>Add to Cart</button>
       </div>
     </div>

@@ -18,6 +18,7 @@ import QuestionPage from "./pages/QuestionPage";
 import QuestionWritingPage from "./pages/QuestionWritingPage";
 import QuestionModifyPage from "./pages/QuestionModifyPage";
 import AddProductPage from "./pages/AddProductPage";
+import OrderPage from "./pages/OrderPage";
 
 import { useEffect, useState } from "react";
 
@@ -40,6 +41,10 @@ function App() {
           <Route path="/products" element={<ProductsPage />}></Route>
           <Route path="/products/add" element={<AddProductPage />}></Route>
           <Route path="/products/:productid" element={<ProductPage />}></Route>
+          <Route
+            path="/products/:productid/order"
+            element={<OrderPage />}
+          ></Route>
           <Route path="/manager" element={<ManagerPage />}></Route>
           <Route path="/manager/products" element={<ManagerPage />}></Route>
           <Route path="/manager/community" element={<ManagerPage />}></Route>
