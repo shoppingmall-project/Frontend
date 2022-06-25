@@ -53,6 +53,8 @@ function ProductPage() {
         <div>재고:{product.stock}</div>
         <div>판매자:{product.seller}</div>
         <div>{product.description}</div>
+        <button>Order</button>
+        <button>Add to Cart</button>
       </div>
     )
   );

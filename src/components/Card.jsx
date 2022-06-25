@@ -10,6 +10,7 @@ function Card(props) {
     e.target.src = defaultImg;
   };
 
+  const onClickOrder = () => {};
   return (
     <div className={styles.card_container}>
       <div className={styles.img_container}>
@@ -29,6 +30,8 @@ function Card(props) {
         </Link>
 
         <div className={styles.product_price}>{price}</div>
+        <button>Order</button>
+        <button>Add to Cart</button>
       </div>
     </div>
   );
